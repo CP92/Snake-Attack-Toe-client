@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Snake Attack Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -12,6 +12,32 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <h1>Snake-Attack-Toe</h1>
+      <button id="sign-out" class="hidden log-out-group">Sign out</button>
+      <div id="logout-message" class="hidden log-out-group"></div>
+      <form id="sign-up-form" class="sign-up-group">
+      <legend>Please enter your information to sign up!</legend>
+      <input required name="credentials[email]" type="email" placeholder="Email"/>
+      <input required name="credentials[password]" type="password" placeholder="Password"/>
+      <input required name="credentials[password_confirmation]" type="password" placeholder="Retype password"/>
+      <input type="submit" value="Submit" class="btn btn-default"/>
+    </form>
+    <br />
+    <div id="sign-up-message" class="sign-up-group">
+    </div>
+    <br />
+      <form id="sign-in-form" class="sign-in-group">
+        <legend>Please enter your login details</legend>
+        <input required name="credentials[email]" type="email" placeholder="Email"/>
+        <input required name="credentials[password]" type="password" placeholder="Password"/>
+        <input type="submit" value="Submit" class="btn btn-default"/>
+      </form>
+      <br />
+      <div id="sign-in-message" class="sign-in-group">
+      </div>
+      <br />
+
+
+
     </body>
 </html>
