@@ -22,7 +22,21 @@ const sendLoginCreds = function (data) {
   })
 }
 
+const sendPassChange = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/change-password',
+    headers: {
+      Authorization: `Token token=${store.token}`
+    },
+    method: 'PATCH',
+    data
+  })
+}
+
+
+
 const sendLogOut = function () {
+  console.log(store)
   return $.ajax({
     url: config.apiUrl + '/sign-out',
     headers: {
@@ -42,7 +56,7 @@ const sendStartGame = function () {
   })
 }
 
-const sendGameUpdate = function (slot) {
+const sendGameUpdate = function (slot, over) {
   // debugger
   return $.ajax({
     url: config.apiUrl + '/games/' + store.currGame.game.id,
@@ -55,7 +69,8 @@ const sendGameUpdate = function (slot) {
         'cell': {
           'index': slot,
           'value': store.currTurn.replace('player_', '')
-        }
+        },
+        'over': over
       }
     }})
 }
@@ -75,11 +90,23 @@ const sendEndGame = function () {
   })
 }
 
+const sendListGames = function () {
+  return $.ajax({
+    url: config.apiUrl + '/games?over=true',
+    headers: {
+      Authorization: `Token token=${store.token}`
+    },
+    method: 'GET'
+  })
+}
+
 module.exports = {
   sendSignUpCreds,
   sendLoginCreds,
   sendLogOut,
   sendStartGame,
   sendGameUpdate,
-  sendEndGame
+  sendEndGame,
+  sendPassChange,
+  sendListGames
 }

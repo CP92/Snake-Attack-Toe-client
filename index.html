@@ -13,13 +13,23 @@
     </head>
     <body>
       <h1>Snake-Attack-Toe</h1>
-      <button id="sign-out" class="hidden log-out-group">Sign out</button>
+      <button id="sign-out" class="hidden">Sign out</button>
+      <button id="change-password" class="hidden">Change password</button>
+      <button id="list-games" class="hidden">List number of games</button>
+      <div id="game-list"></div>
       <div id="logout-message" class="hidden log-out-group"></div>
+
+    <form id="change-password-form" class="hidden sign-up-group">
+      <legend>Please enter your information to sign up!</legend>
+      <input required name="passwords[old]" type="password" placeholder="Current password"/>
+      <input required name="passwords[new]" type="password" placeholder="New Password"/>
+      <input type="submit" value="Submit" class="btn btn-default"/>
+    </form>
       <form id="sign-up-form" class="sign-up-group">
       <legend>Please enter your information to sign up!</legend>
-      <input required name="credentials[email]" type="email" placeholder="Email"/>
-      <input required name="credentials[password]" type="password" placeholder="Password"/>
-      <input required name="credentials[password_confirmation]" type="password" placeholder="Retype password"/>
+      <input id="sign-up-email" required name="credentials[email]" type="email" placeholder="Email"/>
+      <input id="sign-up-password" required name="credentials[password]" type="password" placeholder="Password"/>
+      <input id="sign-up-passwordconfirm" required name="credentials[password_confirmation]" type="password" placeholder="Retype password"/>
       <input type="submit" value="Submit" class="btn btn-default"/>
     </form>
     <br />
@@ -28,8 +38,8 @@
     <br />
       <form id="sign-in-form" class="sign-in-group">
         <legend>Please enter your login details</legend>
-        <input required name="credentials[email]" type="email" placeholder="Email"/>
-        <input required name="credentials[password]" type="password" placeholder="Password"/>
+        <input id="sign-in-email" required name="credentials[email]" type="email" placeholder="Email"/>
+        <input id="sign-in-password" required name="credentials[password]" type="password" placeholder="Password"/>
         <input type="submit" value="Submit" class="btn btn-default"/>
       </form>
       <form id="">
@@ -42,7 +52,7 @@
       <div class="container" id="game-board-container">
         <div id="game-state-message" class="hidden game-state"></div>
 
-        <div><div id="Player-turn" class="hidden"></div><button id="start-game-button">START GAME</button></div>
+        <div><div id="Player-turn" class="hidden"></div><button id="start-game-button">START GAME / RESET</button></div>
         <div class="row" id="row-0">
           <div class="col-sm-4 box" id='box-0'><div id='box-0'></div></div>
           <div class="col-sm-4 box" id='box-1'><div id='box-1'></div></div>

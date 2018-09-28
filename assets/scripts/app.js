@@ -1,6 +1,7 @@
 'use strict'
 
 const authEvents = require('./auth/events')
+const ui = require('./auth/ui')
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')
 
@@ -14,4 +15,8 @@ $(() => {
   $('#sign-out').on('click', authEvents.onLogOut)
   $('.box').on('click', authEvents.onBoxClick)
   $('#start-game-button').on('click', authEvents.onGameStart)
+  $('#change-password').on('click', ui.onPasswordChangeShow)
+  $('#change-password-form').on('submit', authEvents.onPasswordChange)
+  $('#sign-in-form').on('submit', authEvents.onLoginCreds)
+  $('#list-games').on('click', authEvents.onListGamesShow)
 })
