@@ -2,7 +2,6 @@
 
 const store = require('../store')
 const game = require('../game')
-//const events = require('./events')
 
 const signUpError = function (error) {
   console.log(error)

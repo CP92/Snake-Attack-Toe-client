@@ -2,7 +2,7 @@
 
 const api = require('./api')
 const ui = require('./ui')
-const getFormFields = require('/home/pappy/wdi/projects/Snake-Attack-Toe-client/lib/get-form-fields.js')
+const getFormFields = require('../../../lib/get-form-fields')
 const store = require('../store')
 const game = require('../game')
 
