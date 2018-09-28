@@ -12,4 +12,6 @@ $(() => {
   $('#sign-up-form').on('submit', authEvents.onSignUpCreds)
   $('#sign-in-form').on('submit', authEvents.onLoginCreds)
   $('#sign-out').on('click', authEvents.onLogOut)
+  $('.box').on('click', authEvents.onBoxClick)
+  $('#start-game-button').on('click', authEvents.onGameStart)
 })

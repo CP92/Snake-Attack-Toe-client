@@ -32,8 +32,54 @@ const sendLogOut = function () {
   })
 }
 
+const sendStartGame = function () {
+  return $.ajax({
+    url: config.apiUrl + '/games',
+    headers: {
+      Authorization: `Token token=${store.token}`
+    },
+    method: 'POST'
+  })
+}
+
+const sendGameUpdate = function (slot) {
+  // debugger
+  return $.ajax({
+    url: config.apiUrl + '/games/' + store.currGame.game.id,
+    headers: {
+      Authorization: `Token token=${store.token}`
+    },
+    method: 'PATCH',
+    data: {
+      'game': {
+        'cell': {
+          'index': slot,
+          'value': store.currTurn.replace('player_', '')
+        }
+      }
+    }})
+}
+
+const sendEndGame = function () {
+  return $.ajax({
+    url: config.apiUrl + '/games/' + store.currGame.game.id,
+    headers: {
+      Authorization: `Token token=${store.token}`
+    },
+    method: 'PATCH',
+    data: {
+      'game': {
+        'over': true
+      }
+    }
+  })
+}
+
 module.exports = {
   sendSignUpCreds,
   sendLoginCreds,
-  sendLogOut
+  sendLogOut,
+  sendStartGame,
+  sendGameUpdate,
+  sendEndGame
 }

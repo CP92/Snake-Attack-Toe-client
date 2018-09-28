@@ -1,11 +1,17 @@
 'use strict'
 
 const store = require('../store')
+const game = require('../game')
+//const events = require('./events')
 
 const signUpError = function (error) {
   console.log(error)
 
   $('#sign-up-message').html('<h4>The email you have entered already exists, please try another one or sign in using the email address</h4>')
+}
+
+const error = function () {
+  $('#game-state-message').html('<h4>Something broke!</h4>')
 }
 
 const signUpSuccess = function () {
@@ -32,9 +38,50 @@ const logOutSuccess = function (response) {
   $('#sign-out').addClass('hidden')
 }
 
+const notLoggedIn = function () {
+  $('#game-state-message').fadeIn().html('<h4>Please log in to do that!</h4>')
+  setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 1000)
+}
+
+const startGame = function (response) {
+  $('#game-state-message').html('<h4>Game in progress!</h4>')
+  $('#game-state-message').addClass('in-play')
+  $('#game-state-message').removeClass('hidden')
+  $('#Player-turn').html(`<h4>Player turn: ${store.currTurn.replace('_', ' ')}</h4>`)
+  $('#Player-turn').removeClass('hidden')
+  console.log(response.game)
+  store.currGame = response
+}
+
+const gameUpdate = function (response) {
+  console.log(response)
+
+  $(`#box-${store.posClicked}`).html(`<h4>${store.currTurn.replace('player_', '')}</h4>`)
+  //Check if there is a winner
+  if (store.gameOver) {
+    $('#game-state-message').html(`<h2>Winner Winner chicken dinner! ${store.currTurn.replace('_', ' ')}</h2>`)
+  } else {
+
+    game.togglePlayer()
+    $('#Player-turn').html(`<h4>Player turn: ${store.currTurn.replace('_', ' ')}</h4>`)
+  }
+  console.log('end of ui')
+}
+
+
+
+const endGame = function (response) {
+
+}
+
 module.exports = {
   signUpError,
   signUpSuccess,
   loginSuccess,
-  logOutSuccess
+  logOutSuccess,
+  notLoggedIn,
+  startGame,
+  gameUpdate,
+  endGame,
+  error
 }

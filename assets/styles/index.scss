@@ -1,5 +1,37 @@
 @import '~bootstrap/scss/bootstrap';
 
+h1 {
+  text-align: center;
+}
+
 .hidden {
   display: none;
+}
+
+.col-sm-4 {
+  border-style: solid;
+  border-width: medium;
+  height: auto;
+
+}
+
+.row {
+  width: 100%
+
+}
+
+.box {
+  height: 100px
+}
+.container {
+  text-align: center;
+  }
+
+div.game-state {
+  display:inline-block;
+  color: red;
+}
+
+.in-play {
+  color: green;
 }
