@@ -19,4 +19,6 @@ $(() => {
   $('#change-password-form').on('submit', authEvents.onPasswordChange)
   $('#sign-in-form').on('submit', authEvents.onLoginCreds)
   $('#list-games').on('click', authEvents.onListGamesShow)
+  $('#sign-in-button').on('click', ui.showLoginForm)
+  $('#sign-up-button').on('click', ui.showSignUpForm)
 })

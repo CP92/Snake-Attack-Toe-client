@@ -10,13 +10,15 @@ const signUpError = function (error) {
 }
 // Generic error when something unforseen breaks
 const error = function () {
-  $('#game-state-message').html('<h4>Something broke!</h4>')
+  $('#game-state-message').fadeIn().html('<h4>Something broke!</h4>')
+  setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 1000)
 }
 // shows the player they are signed up
 const signUpSuccess = function () {
   $('#sign-up-message').html('')
   $('#sign-up-form').addClass('hidden')
   $('#sign-up-message').fadeIn().html('<h4>Sign up successful! Please login.</h4>')
+  setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 1000)
   $('#sign-up-form').trigger('reset')
 }
 //  shows the player they are logged in
@@ -31,19 +33,25 @@ const loginSuccess = function (response) {
   $('#change-password').removeClass('hidden')
   $('#sign-in-form').addClass('hidden')
   $('#sign-up-form').addClass('hidden')
+  $('#sign-in-button').addClass('hidden')
+  $('#sign-up-button').addClass('hidden')
   $('#sign-in-form').trigger('reset')
   $('#list-games').removeClass('hidden')
 }
 
 const listGames = function (response) {
   console.log(response.games)
-  let number = response.games
+  const number = response.games
   $('#game-list').html(`Games played by user: ${number.length}`)
   console.log(response)
 }
 
 const onPasswordChangeShow = function () {
-  $('#change-password-form').removeClass('hidden')
+  if ($('#change-password-form').hasClass('hidden')) {
+    $('#change-password-form').removeClass('hidden')
+  } else {
+    $('#change-password-form').addClass('hidden')
+  }
 }
 
 const passChangeSuccess = function () {
@@ -53,17 +61,42 @@ const passChangeSuccess = function () {
   $('#change-password-form').trigger('reset')
 }
 
+const loginError = function () {
+  $('#game-state-message').fadeIn().html('<h4>Please enter a existing email and password.</h4>')
+  setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 1000)
+}
+
+const showLoginForm = function () {
+  if ($('#sign-in-form').hasClass('hidden')) {
+    $('#sign-up-form').addClass('hidden')
+    $('#sign-in-form').removeClass('hidden')
+  } else {
+    $('#sign-in-form').addClass('hidden')
+  }
+}
+
+const showSignUpForm = function () {
+  if ($('#sign-up-form').hasClass('hidden')) {
+    $('#sign-in-form').addClass('hidden')
+    $('#sign-up-form').removeClass('hidden')
+  } else {
+    $('#sign-up-form').addClass('hidden')
+  }
+}
+
 //  Shows the player they are logged out
 const logOutSuccess = function (response) {
-  //store.token = null
+  // store.token = null
   console.log(store)
   $('#logout-message').fadeIn().html('<h4>Logout successful!</h4>')
   setTimeout(function () { $('#logout-message').fadeOut('slow') }, 1000)
   $('#sign-out').addClass('hidden')
   $('#change-password-form').addClass('hidden')
   $('#change-password').addClass('hidden')
-  $('#sign-in-form').removeClass('hidden')
-  $('#sign-up-form').removeClass('hidden')
+  $('#list-games').addClass('hidden')
+  $('#game-list').addClass('hidden')
+  $('#sign-in-button').removeClass('hidden')
+  $('#sign-up-button').removeClass('hidden')
   $('#change-password-form').trigger('reset')
   $('#sign-in-form').trigger('reset')
   $('#sign-up-form').trigger('reset')
@@ -74,8 +107,9 @@ const noInputAllowed = function () {
   if (!store.token) {
     $('#game-state-message').fadeIn().html('<h4>Please log in to do that!</h4>')
     setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 1000)
-  } else if (store.gameOver === true) {
-    $('#game-state-message').fadeIn().html()
+  } else if (store.gameOver || !store.gameOn) {
+    $('#game-state-message').fadeIn().html('<h4>Please start a new game!</h4>')
+    setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 1000)
   }
 }
 
@@ -89,8 +123,8 @@ const wipeBoard = function () {
 
 //  Updates the ui for a new game
 const startGame = function (response) {
-  $('#game-state-message').html('<h4>Game in progress!</h4>')
-  $('#game-state-message').addClass('in-play')
+  $('#game-state-message').fadeIn().html('<h4>Game in progress!</h4>')
+  // $('#game-state-message').addClass('in-play')
   $('#game-state-message').removeClass('hidden')
   $('#Player-turn').html(`<h4>Player turn: ${store.currTurn.replace('_', ' ')}</h4>`)
   $('#Player-turn').removeClass('hidden')
@@ -124,5 +158,8 @@ module.exports = {
   onPasswordChangeShow,
   passChangeSuccess,
   wipeBoard,
-  listGames
+  listGames,
+  showLoginForm,
+  showSignUpForm,
+  loginError
 }

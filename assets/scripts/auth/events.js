@@ -21,7 +21,7 @@ const onLoginCreds = function (event) {
 
   api.sendLoginCreds(credData)
     .then(ui.loginSuccess)
-    .catch(ui.error)
+    .catch(ui.loginError)
 }
 
 const onListGamesShow = function () {
@@ -49,11 +49,12 @@ const onLogOut = function (event) {
 
 const onGameStart = function (event) {
   store.currGame = null
+  store.gameOn = true
   ui.wipeBoard()
   store.currTurn = 'player_x'
   api.sendStartGame()
     .then(ui.startGame)
-    .catch(ui.notLoggedIn)
+    .catch(ui.noInputAllowed)
 }
 
 const onGameOver = function () {
@@ -63,14 +64,17 @@ const onGameOver = function () {
 }
 
 const onBoxClick = function (event) {
-  if (store.token) {
+  if (store.token && store.gameOn) {
     store.posClicked = parseInt(event.target.getAttribute('id').replace('box-', ''))
     store.moves += 1
     const cellData = store.currGame
     cellData.game.cells[parseInt(event.target.getAttribute('id').replace('box-', ''))] = store.currTurn.replace('player_', '')
     store.currGame = cellData
-    let over = game.checkGameOver(store.currGame.game.cells)
+    const over = game.checkGameOver(store.currGame.game.cells)
     console.log(over)
+    if (over) {
+      store.gameOn = false
+    }
     api.sendGameUpdate(parseInt(event.target.getAttribute('id').replace('box-', '')), over)
       .then(ui.gameUpdate)
       .catch(ui.error)
