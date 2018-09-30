@@ -64,7 +64,7 @@ const onGameOver = function () {
 }
 
 const onBoxClick = function (event) {
-  if (store.token && store.gameOn) {
+  if (store.token && store.gameOn && !game.doesExist(parseInt(event.target.getAttribute('id').replace('box-', '')))) {
     store.posClicked = parseInt(event.target.getAttribute('id').replace('box-', ''))
     store.moves += 1
     const cellData = store.currGame

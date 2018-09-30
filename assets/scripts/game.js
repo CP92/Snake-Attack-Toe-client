@@ -32,12 +32,16 @@ const togglePlayer = function () {
   }
 }
 
-const gameOvPush = function () {
-  events.gameOver()
+const doesExist = function (pos) {
+  if (store.currGame.game.cells[pos] === '') {
+    return false
+  } else {
+    return true
+  }
 }
 
 module.exports = {
   togglePlayer,
   checkGameOver,
-  gameOvPush
+  doesExist
 }

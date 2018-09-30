@@ -100,6 +100,11 @@ const logOutSuccess = function (response) {
   $('#change-password-form').trigger('reset')
   $('#sign-in-form').trigger('reset')
   $('#sign-up-form').trigger('reset')
+  $('#game-state-message').html('')
+  $('#player-turn').addClass('hidden')
+  store.token = null
+  store.gameOn = false
+  wipeBoard()
 }
 
 //  Stops the user from interacting with the game board if the game is over
@@ -126,13 +131,14 @@ const startGame = function (response) {
   $('#game-state-message').fadeIn().html('<h4>Game in progress!</h4>')
   // $('#game-state-message').addClass('in-play')
   $('#game-state-message').removeClass('hidden')
-  $('#Player-turn').html(`<h4>Player turn: ${store.currTurn.replace('_', ' ')}</h4>`)
-  $('#Player-turn').removeClass('hidden')
+  $('#player-turn').html(`<h4>Player turn: ${store.currTurn.replace('_', ' ')}</h4>`)
+  $('#player-turn').removeClass('hidden')
   store.currGame = response
 }
 
 const gameUpdate = function (response) {
   console.log(response)
+  store.currGame = response
   $(`#box-${store.posClicked}`).html(`<h4>${store.currTurn.replace('player_', '')}</h4>`)
   // Check if there is a winner, update UI if there is
   if (store.gameOver && !store.isTie) {
