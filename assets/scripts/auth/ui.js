@@ -11,7 +11,8 @@ const signUpError = function (error) {
   $('#sign-up-form').trigger('reset')
 }
 // Generic error when something unforseen breaks
-const error = function () {
+const error = function (response) {
+  console.log(response)
   $('#game-state-message').fadeIn().html('<h4>Something broke!</h4>')
   setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 1000)
 }
@@ -114,7 +115,10 @@ const logOutSuccess = function (response) {
   $('#game-state-message').html('')
   $('#player-turn').addClass('hidden')
   store.token = null
-  store.gameOn = false
+  store.gameOn = null
+  store.gameOver = null
+  store.isTie = null
+  store.currGame = null
   wipeBoard()
 }
 
