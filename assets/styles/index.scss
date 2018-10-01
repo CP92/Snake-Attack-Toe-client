@@ -8,11 +8,16 @@ h1 {
   display: none;
 }
 
-.col-sm-4 {
+.column{
   border-style: solid;
   border-width: medium;
-  height: auto;
+  height: 33%;
 
+}
+
+.container {
+  height: 100%;
+  width: 30%;
 }
 
 .row {
@@ -30,12 +35,4 @@ h1 {
 div.game-state {
   display:inline-block;
   color: red;
-}
-
-.in-play {
-  color: green;
-}
-
-.btn-success .btn-warning {
-  height: 100px;
 }
