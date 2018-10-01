@@ -11,8 +11,6 @@ h1 {
 .column{
   border-style: solid;
   border-width: medium;
-  height: 33%;
-
 }
 
 .container {
@@ -26,7 +24,8 @@ h1 {
 }
 
 .box {
-  height: 100px
+  height: 100px;
+  width: 100px;
 }
 .container {
   text-align: center;
