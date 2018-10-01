@@ -5,14 +5,14 @@ const game = require('../game')
 
 //  Warns the player signing up that they've already signed up with that email address
 const signUpError = function (error) {
-  console.log(error)
+  //console.log(error)
   $('#sign-up-message').html('<h4>The email you have entered already exists, please try another one or sign in using the email address</h4>')
   setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 1000)
   $('#sign-up-form').trigger('reset')
 }
 // Generic error when something unforseen breaks
 const error = function (response) {
-  console.log(response)
+  //console.log(response)
   $('#game-state-message').fadeIn().html('<h4>Something broke!</h4>')
   setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 1000)
 }
@@ -44,7 +44,7 @@ const loginSuccess = function (response) {
 }
 
 const listGames = function (response) {
-  console.log(response.games)
+  //console.log(response.games)
   let number = response.games
   $('#game-list').html(`Games played by user: ${number.length}`)
   //console.log(response)
