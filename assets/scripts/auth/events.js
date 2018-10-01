@@ -27,7 +27,7 @@ const onLoginCreds = function (event) {
 const onListGamesShow = function () {
   api.sendListGames()
     .then(ui.listGames)
-    .catch()
+    .catch(ui.error)
 }
 
 const onPasswordChange = function (event) {

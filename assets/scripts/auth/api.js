@@ -91,6 +91,7 @@ const sendEndGame = function () {
 }
 
 const sendListGames = function () {
+  console.log('List api called')
   return $.ajax({
     url: config.apiUrl + '/games?over=true',
     headers: {
