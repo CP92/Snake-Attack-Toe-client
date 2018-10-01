@@ -12,21 +12,22 @@ h1 {
   border-style: solid;
   border-width: medium;
 }
-
+/*
 .container {
   height: 100%;
-  width: 30%;
+  width: 100%;
 }
-
+*/
 .row {
-  width: 100%
-
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .box {
   height: 100px;
   width: 100px;
 }
+
 .container {
   text-align: center;
   }

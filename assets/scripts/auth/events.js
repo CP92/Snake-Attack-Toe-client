@@ -48,6 +48,7 @@ const onLogOut = function (event) {
 }
 
 const onGameStart = function (event) {
+  store.moves = 0
   store.currGame = null
   store.gameOn = true
   ui.wipeBoard()
@@ -67,11 +68,12 @@ const onBoxClick = function (event) {
   if (store.token && store.gameOn && !game.doesExist(parseInt(event.target.getAttribute('id').replace('box-', '')))) {
     store.posClicked = parseInt(event.target.getAttribute('id').replace('box-', ''))
     store.moves += 1
+    //console.log(store.moves)
     const cellData = store.currGame
     cellData.game.cells[parseInt(event.target.getAttribute('id').replace('box-', ''))] = store.currTurn.replace('player_', '')
     store.currGame = cellData
     const over = game.checkGameOver(store.currGame.game.cells)
-    console.log(over)
+    //console.log(over)
     if (over) {
       store.gameOn = false
     }
@@ -79,7 +81,7 @@ const onBoxClick = function (event) {
       .then(ui.gameUpdate)
       .catch(ui.error)
   } else {
-    ui.noInputAllowed()
+    ui.noInputAllowed(event)
   }
 }
 

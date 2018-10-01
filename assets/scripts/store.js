@@ -1,5 +1,7 @@
 'use strict'
 
-const store = {}
+const store = {
+  gameOn: false
+}
 
 module.exports = store
