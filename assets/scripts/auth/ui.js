@@ -4,7 +4,7 @@ const store = require('../store')
 const game = require('../game')
 
 //  Warns the player signing up that they've already signed up with that email address
-const signUpError = function (error) {
+const signUpError = function () {
   //console.log(error)
   $('#sign-up-message').html('<h4>The email you have entered already exists, please try another one or sign in using the email address</h4>')
   setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 1000)
@@ -161,7 +161,7 @@ const gameUpdate = function (response) {
   //console.log(response)
   store.currGame = response
 //  console.log(store.isTie)
-  $(`#box-${store.posClicked}`).html(`<h4>${store.currTurn.replace('player_', '')}</h4>`)
+  $(`#box-${store.posClicked}`).html(`<h1>${store.currTurn.replace('player_', '')}</h1>`)
   // Check if there is a winner, update UI if there is
   if (store.gameOver && !store.isTie) {
     $('#game-state-message').html(`<h2>Winner Winner chicken dinner! ${store.currTurn.replace('_', ' ')}</h2>`)
