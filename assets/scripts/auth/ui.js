@@ -7,27 +7,27 @@ const game = require('../game')
 const signUpError = function () {
   //console.log(error)
   $('#sign-up-message').html('<h4>The email you have entered already exists, please try another one or sign in using the email address</h4>')
-  setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 1000)
+  setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 500)
   $('#sign-up-form').trigger('reset')
 }
 // Generic error when something unforseen breaks
 const error = function (response) {
   //console.log(response)
   $('#game-state-message').fadeIn().html('<h4>Something broke!</h4>')
-  setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 1000)
+  setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 500)
 }
 // shows the player they are signed up
 const signUpSuccess = function () {
   $('#sign-up-message').html('')
   $('#sign-up-form').addClass('hidden')
   $('#sign-up-message').fadeIn().html('<h4>Sign up successful! Please login.</h4>')
-  setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 1000)
+  setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 500)
   $('#sign-up-form').trigger('reset')
 }
 //  shows the player they are logged in
 const loginSuccess = function (response) {
   $('#sign-in-message').fadeIn().html('<h4>Login successful!</h4>')
-  setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 1000)
+  setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 500)
 //  console.log(response)
   const user = response.user
   store.token = user.token
@@ -65,13 +65,13 @@ const onPasswordChangeShow = function () {
 const passChangeSuccess = function () {
   $('#change-password-form').addClass('hidden')
   $('#sign-in-message').fadeIn().html('<h4>Password change successful!</h4>')
-  setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 1000)
+  setTimeout(function () { $('#sign-in-message').fadeOut('slow') }, 500)
   $('#change-password-form').trigger('reset')
 }
 
 const loginError = function () {
   $('#game-state-message').fadeIn().html('<h4>Please enter a existing email and password.</h4>')
-  setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 1000)
+  setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 500)
   $('#sign-in-form').trigger('reset')
 }
 
@@ -102,7 +102,7 @@ const logOutSuccess = function (response) {
   // store.token = null
   //console.log(store)
   $('#logout-message').fadeIn().html('<h4>Logout successful!</h4>')
-  setTimeout(function () { $('#logout-message').fadeOut('slow') }, 1000)
+  setTimeout(function () { $('#logout-message').fadeOut('slow') }, 500)
   $('#sign-out').addClass('hidden')
   $('#change-password-form').addClass('hidden')
   $('#change-password').addClass('hidden')
@@ -128,13 +128,13 @@ const noInputAllowed = function (event) {
 
   if (!store.token) {
     $('#game-state-message').fadeIn().html('<h4>Please log in to do that!</h4>')
-    setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 1000)
+    setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 500)
   } else if (store.gameOver || !store.gameOn) {
     $('#game-state-message').fadeIn().html('<h4>Please start a new game!</h4>')
-    setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 1000)
-  } else if (store.currGame !== undefined && game.doesExist(parseInt(event.target.getAttribute('id').replace('box-', '')))) {
+    setTimeout(function () { $('#game-state-message').fadeOut('slow') }, 500)
+  } else if (store.currGame !== undefined && game.doesExist(store.posClicked)) {
     $('#game-warning-message').fadeIn('slow').html('<h4>A piece already exists there!</h4>')
-    setTimeout(function () { $('#game-warning-message').fadeOut('slow') }, 1000)
+    setTimeout(function () { $('#game-warning-message').fadeOut('slow') }, 500)
     //store.placeNotAllowed = false
   }
 }
@@ -149,19 +149,20 @@ const wipeBoard = function () {
 
 //  Updates the ui for a new game
 const startGame = function (response) {
+store.currGame = response
   $('#game-state-message').fadeIn().html('<h4>Game in progress!</h4>')
   // $('#game-state-message').addClass('in-play')
   $('#game-state-message').removeClass('hidden')
   $('#player-turn').html(`<h4>Player turn: ${store.currTurn.replace('_', ' ')}</h4>`)
   $('#player-turn').removeClass('hidden')
-  store.currGame = response
+
 }
 
 const gameUpdate = function (response) {
   //console.log(response)
   store.currGame = response
 //  console.log(store.isTie)
-  $(`#box-${store.posClicked}`).html(`<h1>${store.currTurn.replace('player_', '')}</h1>`)
+  $(`#${store.posClicked}`).html(`<h1>${store.currTurn.replace('player_', '')}</h1>`)
   // Check if there is a winner, update UI if there is
   if (store.gameOver && !store.isTie) {
     $('#game-state-message').html(`<h2>Winner Winner chicken dinner! ${store.currTurn.replace('_', ' ')}</h2>`)

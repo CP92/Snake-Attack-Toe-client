@@ -1,7 +1,7 @@
 'use strict'
 
 const config = require('../config')
-const ui = require('./ui')
+//const ui = require('./ui')
 const store = require('../store')
 
 const sendSignUpCreds = function (data) {
@@ -91,7 +91,7 @@ const sendEndGame = function () {
 }
 
 const sendListGames = function () {
-  console.log('List api called')
+  //console.log('List api called')
   return $.ajax({
     url: config.apiUrl + '/games?over=true',
     headers: {

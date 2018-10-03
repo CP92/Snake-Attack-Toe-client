@@ -40,7 +40,7 @@ const onPasswordChange = function (event) {
 }
 
 const onLogOut = function (event) {
-  //console.log(event)
+  // console.log(event)
   event.preventDefault()
   api.sendLogOut()
     .then(ui.logOutSuccess)
@@ -48,14 +48,18 @@ const onLogOut = function (event) {
 }
 
 const onGameStart = function (event) {
-  store.moves = 0
-  store.currGame = null
-  store.gameOn = true
-  ui.wipeBoard()
-  store.currTurn = 'player_x'
-  api.sendStartGame()
-    .then(ui.startGame)
-    .catch(ui.noInputAllowed)
+  if (store.token) {
+    store.moves = 0
+    store.currGame = null
+    store.gameOn = true
+    ui.wipeBoard()
+    store.currTurn = 'player_x'
+    api.sendStartGame()
+      .then(ui.startGame)
+      .catch(ui.error)
+  } else {
+    ui.noInputAllowed()
+  }
 }
 
 const onGameOver = function () {
@@ -65,27 +69,26 @@ const onGameOver = function () {
 }
 
 const onBoxClick = function (event) {
-  if (store.token && store.gameOn && !game.doesExist(parseInt(event.target.getAttribute('id').replace('box-', '')))) {
-    store.posClicked = parseInt(event.target.getAttribute('id').replace('box-', ''))
+const place = parseInt(event.target.getAttribute('id'))
+  if (store.token && store.gameOn && !game.doesExist(place)) {
+    store.posClicked = parseInt(event.target.getAttribute('id'))
     store.moves += 1
-    //console.log(store.moves)
+    // console.log(store.moves)
     const cellData = store.currGame
-    cellData.game.cells[parseInt(event.target.getAttribute('id').replace('box-', ''))] = store.currTurn.replace('player_', '')
+    cellData.game.cells[parseInt(event.target.getAttribute('id'))] = store.currTurn.replace('player_', '')
     store.currGame = cellData
     const over = game.checkGameOver(store.currGame.game.cells)
-    //console.log(over)
+    // console.log(over)
     if (over) {
       store.gameOn = false
     }
-    api.sendGameUpdate(parseInt(event.target.getAttribute('id').replace('box-', '')), over)
+    api.sendGameUpdate(parseInt(event.target.getAttribute('id')), over)
       .then(ui.gameUpdate)
       .catch(ui.error)
   } else {
     ui.noInputAllowed(event)
   }
 }
-
-
 
 module.exports = {
   onSignUpCreds,
