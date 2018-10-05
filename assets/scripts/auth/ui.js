@@ -141,7 +141,7 @@ const noInputAllowed = function (event) {
 
 const wipeBoard = function () {
   for (let i = 0; i < 9; i++) {
-    $(`#box-${i}`).html('')
+    $(`#${i}`).html('')
   }
   store.gameOver = false
   store.isTie = false
