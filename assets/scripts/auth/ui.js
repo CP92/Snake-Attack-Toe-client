@@ -6,9 +6,10 @@ const game = require('../game')
 //  Warns the player signing up that they've already signed up with that email address
 const signUpError = function () {
   //console.log(error)
-  $('#sign-up-message').html('<h4>The email you have entered already exists, please try another one or sign in using the email address</h4>')
+  $('#sign-up-message').html("<h4>The email you have entered already exists, or your passwords don't match. Please try again</h4>")
   setTimeout(function () { $('#sign-up-message').fadeOut('slow') }, 500)
   $('#sign-up-form').trigger('reset')
+
 }
 // Generic error when something unforseen breaks
 const error = function (response) {
