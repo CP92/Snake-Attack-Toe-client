@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Tic Tac Toe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <h1>Tic-Tac-Toe</h1>
+      <button id="sign-out" class="hidden">Sign out</button>
+      <button id="change-password" class="hidden">Change password</button>
+      <button id="list-games" class="hidden">List number of games</button>
+      <div id="game-list"></div>
+      <div id="logout-message" class="hidden log-out-group"></div>
+      <div class="col-md-4 text-center">
+      <button id='sign-in-button' type"button" class="btn-lg btn-success">LOG IN</button>
+      <button id='sign-up-button'type"button" class="btn-lg btn-warning">SIGN UP</button>
+    </div>
+    <form id="change-password-form" class="hidden sign-up-group">
+      <legend>Please enter your information to sign up!</legend>
+      <input required name="passwords[old]" type="password" placeholder="Current password"/>
+      <input required name="passwords[new]" type="password" placeholder="New Password"/>
+      <input type="submit" value="Submit" class="btn btn-default"/>
+    </form>
+      <form id="sign-up-form" class="hidden sign-up-group">
+      <legend>Please enter your information to sign up!</legend>
+      <input id="sign-up-email" required name="credentials[email]" type="email" placeholder="Email"/>
+      <input id="sign-up-password" required name="credentials[password]" type="password" placeholder="Password"/>
+      <input id="sign-up-passwordconfirm" required name="credentials[password_confirmation]" type="password" placeholder="Retype password"/>
+      <input type="submit" value="Submit" class="btn btn-default"/>
+    </form>
+    <br />
+    <div>
+    <div id="sign-up-message" class="sign-up-group"></div>
+  </div>
+    <br />
+      <form id="sign-in-form" class="hidden sign-in-group">
+        <legend>Please enter your login details</legend>
+        <input id="sign-in-email" required name="credentials[email]" type="email" placeholder="Email"/>
+        <input id="sign-in-password" required name="credentials[password]" type="password" placeholder="Password"/>
+        <input type="submit" value="Submit" class="btn btn-default"/>
+      </form>
+      <br />
+      <div id="sign-in-message" class="sign-in-group">
+      </div>
+      <br />
+
+      <div class="container" id="game-board-container">
+        <div>
+
+        <div id="game-warning-message" class="hidden game-state"></div>
+
+        <div id="game-state-message" class="hidden game-state"></div>
+      </div>
+        <div><div id="player-turn" class="hidden"></div><button id="start-game-button">START GAME / RESET</button></div>
+        <div class="row" id="row-0">
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='0'><div id='0'></div></div>
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='1'><div id='1'></div></div>
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='2'><div id='2'></div></div>
+        </div>
+        <div class="row" id="row-1">
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='3'><div id='3'></div></div>
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='4'><div id='4'></div></div>
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='5'><div id='5'></div></div>
+        </div>
+        <div class="row" id="row-2">
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='6'><div id='6'></div></div>
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='7'><div id='7'></div></div>
+          <div class="column col-lg-4 col-md-4 col-sm-4 col-xs-4 box" id='8'><div id='8'></div></div>
+        </div>
+      </div>
+
+
+
+    </body>
+</html>
